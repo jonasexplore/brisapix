@@ -5,17 +5,17 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
+import { UserEntity } from '../users/user.entity';
 
-@Entity()
-export class Key {
+@Entity('keys')
+export class KeyEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  value: number;
+  value: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => UserEntity)
   @JoinColumn()
-  user: User;
+  user: UserEntity;
 }

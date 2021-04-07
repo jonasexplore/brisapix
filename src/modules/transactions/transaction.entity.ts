@@ -5,21 +5,21 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
+import { UserEntity } from '../users/user.entity';
 
-@Entity()
-export class Transaction {
+@Entity('transactions')
+export class TransactionEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   value: number;
 
-  @OneToOne(() => User)
+  @OneToOne(() => UserEntity)
   @JoinColumn()
-  user_send: User;
+  user_send: UserEntity;
 
-  @OneToOne(() => User)
+  @OneToOne(() => UserEntity)
   @JoinColumn()
-  user_recive: User;
+  user_recive: UserEntity;
 }
