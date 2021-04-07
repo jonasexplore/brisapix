@@ -5,9 +5,9 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from '../users/user.entity';
+import { UserEntity } from '../users/user.entity';
 
-@Entity()
+@Entity('transactions')
 export class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,11 +15,11 @@ export class Transaction {
   @Column()
   value: number;
 
-  @OneToOne(() => User)
+  @OneToOne(() => UserEntity)
   @JoinColumn()
-  user_send: User;
+  user_send: UserEntity;
 
-  @OneToOne(() => User)
+  @OneToOne(() => UserEntity)
   @JoinColumn()
-  user_recive: User;
+  user_recive: UserEntity;
 }
