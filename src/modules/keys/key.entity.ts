@@ -8,12 +8,12 @@ import {
 import { UserEntity } from '../users/user.entity';
 
 @Entity('keys')
-export class Key {
+export class KeyEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  value: number;
+  value: string;
 
   @OneToOne(() => UserEntity)
   @JoinColumn()
