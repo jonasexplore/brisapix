@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotAccept } from 'src/errors/NotAccept';
+import { NotFound } from 'src/errors/NotFound';
 import { Repository } from 'typeorm';
 import { User } from './dtos/user';
 import { UserEntity } from './user.entity';
@@ -22,12 +24,26 @@ export class UserService {
       where: { id: userId },
     });
 
+    if (!foundUser) {
+      throw new NotFound('USER');
+    }
+
     return foundUser;
   }
 
   public async create(userData: User): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      where: { username: userData.username },
+    });
+
+    if (user) {
+      console.log(user);
+
+      throw new NotAccept('USERNAME_ALREADY_USED');
+    }
+
     const createUser = await this.userRepository.create(userData);
-    this.userRepository.save(createUser);
+    await this.userRepository.save(createUser);
 
     return createUser;
   }
