@@ -14,6 +14,12 @@ const config: ConnectionOptions = {
   synchronize: false,
   migrationsRun: false,
   migrations: [join(__dirname, 'migrations', '*{.ts,.js}')],
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
   cli: {
     migrationsDir: 'src/database/migrations',
   },
